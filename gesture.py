@@ -548,6 +548,7 @@ class GestureController:
             time.sleep(delay)
         raise RuntimeError("Failed to initialize camera after multiple attempts.")
     
+    @staticmethod
     def classify_hands(results):
         """
         sets 'hr_major', 'hr_minor' based on classification(left, right) of 
