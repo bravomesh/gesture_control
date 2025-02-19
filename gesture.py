@@ -539,6 +539,14 @@ class GestureController:
         GestureController.cap = cv2.VideoCapture(0)
         GestureController.CAM_HEIGHT = GestureController.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         GestureController.CAM_WIDTH = GestureController.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    def initialize_camera(self, max_retries=5, delay=2):
+        for _ in range(max_retries):
+            cap = cv2.VideoCapture(0)
+            if cap.isOpened():
+                return cap
+            print(f"Camera initialization failed. Retrying in {delay} seconds...")
+            time.sleep(delay)
+        raise RuntimeError("Failed to initialize camera after multiple attempts.")
     
     def classify_hands(results):
         """
