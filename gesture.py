@@ -1,5 +1,4 @@
 # Imports
-
 import cv2
 import mediapipe as mp
 import pyautogui
@@ -10,6 +9,7 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from google.protobuf.json_format import MessageToDict
 import screen_brightness_control as sbcontrol
+import time
 
 pyautogui.FAILSAFE = False
 mp_drawing = mp.solutions.drawing_utils
