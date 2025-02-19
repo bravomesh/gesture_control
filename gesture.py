@@ -44,6 +44,26 @@ class HLabel(IntEnum):
     MINOR = 0
     MAJOR = 1
 
+# Kalman Filter for Smoothing
+class KalmanFilter:
+    def __init__(self, process_variance=1e-5, measurement_variance=0.1):
+        self.process_variance = process_variance
+        self.measurement_variance = measurement_variance
+        self.estimated_position = 0
+        self.estimation_error = 1
+
+    def update(self, measurement):
+        # Prediction
+        prediction = self.estimated_position
+        prediction_error = self.estimation_error + self.process_variance
+
+        # Update
+        kalman_gain = prediction_error / (prediction_error + self.measurement_variance)
+        self.estimated_position = prediction + kalman_gain * (measurement - prediction)
+        self.estimation_error = (1 - kalman_gain) * prediction_error
+
+        return self.estimated_position
+
 # Convert Mediapipe Landmarks to recognizable Gestures
 class HandRecog:
     """
