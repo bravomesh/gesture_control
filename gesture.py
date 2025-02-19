@@ -299,16 +299,17 @@ class Controller:
     prev_hand = None
     pinch_threshold = 0.3
     
+    @staticmethod
     def getpinchylv(hand_result):
         """returns distance beween starting pinch y coord and current hand position y coord."""
         dist = round((Controller.pinchstartycoord - hand_result.landmark[8].y)*10,1)
         return dist
-
+    @staticmethod
     def getpinchxlv(hand_result):
         """returns distance beween starting pinch x coord and current hand position x coord."""
         dist = round((hand_result.landmark[8].x - Controller.pinchstartxcoord)*10,1)
         return dist
-    
+    @staticmethod
     def changesystembrightness():
         """sets system brightness based on 'Controller.pinchlv'."""
         currentBrightnessLv = sbcontrol.get_brightness(display=0)/100.0
@@ -319,6 +320,7 @@ class Controller:
             currentBrightnessLv = 0.0       
         sbcontrol.fade_brightness(int(100*currentBrightnessLv) , start = sbcontrol.get_brightness(display=0))
     
+    @staticmethod
     def changesystemvolume():
         """sets system volume based on 'Controller.pinchlv'."""
         devices = AudioUtilities.GetSpeakers()
@@ -332,11 +334,12 @@ class Controller:
             currentVolumeLv = 0.0
         volume.SetMasterVolumeLevelScalar(currentVolumeLv, None)
     
+    @staticmethod
     def scrollVertical():
         """scrolls on screen vertically."""
         pyautogui.scroll(120 if Controller.pinchlv>0.0 else -120)
         
-    
+    @staticmethod
     def scrollHorizontal():
         """scrolls on screen horizontally."""
         pyautogui.keyDown('shift')
@@ -347,6 +350,7 @@ class Controller:
 
     # Locate Hand to get Cursor Position
     # Stabilize cursor by Dampening
+    @staticmethod
     def get_position(hand_result):
         """
         returns coordinates of current hand position.
@@ -381,7 +385,7 @@ class Controller:
             ratio = 2.1
         x , y = x_old + delta_x*ratio , y_old + delta_y*ratio
         return (x,y)
-
+    @staticmethod
     def pinch_control_init(hand_result):
         """Initializes attributes for pinch gesture."""
         Controller.pinchstartxcoord = hand_result.landmark[8].x
@@ -391,6 +395,7 @@ class Controller:
         Controller.framecount = 0
 
     # Hold final position for 5 frames to change status
+    @staticmethod
     def pinch_control(hand_result, controlHorizontal, controlVertical):
         """
         calls 'controlHorizontal' or 'controlVertical' based on pinch flags, 
@@ -437,7 +442,7 @@ class Controller:
             else:
                 Controller.prevpinchlv = lvx
                 Controller.framecount = 0
-
+    @staticmethod
     def handle_controls(gesture, hand_result):  
         """Impliments all gesture functionality."""      
         x,y = None,None
