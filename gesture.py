@@ -170,7 +170,7 @@ class HandRecog:
         -------
         None
         """
-        if self.hand_result == None:
+        if self.hand_result is None:
             return
 
         points = [[8,5,0],[12,9,0],[16,13,0],[20,17,0]]
@@ -184,7 +184,7 @@ class HandRecog:
             try:
                 ratio = round(dist/dist2,1)
             except:
-                ratio = round(dist1/0.01,1)
+                ratio = round(dist/0.01,1)
 
             self.finger = self.finger << 1
             if ratio > 0.5 :
@@ -202,7 +202,7 @@ class HandRecog:
         -------
         int
         """
-        if self.hand_result == None:
+        if self.hand_result is None:
             return Gest.PALM
 
         current_gesture = Gest.PALM
