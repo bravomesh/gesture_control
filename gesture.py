@@ -99,6 +99,8 @@ class HandRecog:
         self.frame_count = 0
         self.hand_result = None
         self.hand_label = hand_label
+        self.kf_x = KalmanFilter()
+        self.kf_y = KalmanFilter()
     
     def update_hand_result(self, hand_result):
         self.hand_result = hand_result
