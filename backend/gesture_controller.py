@@ -56,6 +56,14 @@ class GestureController:
         else:
             GestureController.hr_major = left
             GestureController.hr_minor = right
+##continue working on this!!
+    def set_dominant_hand(self, dominant_hand: str):
+        if dominant_hand.lower() == "right":
+            self.dom_hand = True
+        elif dominant_hand.lower() == "left":
+            self.dom_hand = False
+        else:
+            raise ValueError("Invalid dominant hand. Choose 'right' or 'left'.")
 
     def start(self):
         GestureController.gc_mode = 1
